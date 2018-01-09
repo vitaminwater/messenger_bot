@@ -15,6 +15,10 @@ func init() {
 	VERIFY_TOKEN = os.Getenv("VERIFY_TOKEN")
 }
 
+/**
+ * Hook GET request
+ */
+
 type HookVerifyQuery struct {
 	VerifyToken string `form:"hub.verify_token"`
 	Challenge   string `form:"hub.challenge"`
@@ -41,6 +45,10 @@ func hookVerify(c *gin.Context) {
 
 	c.String(200, h.Challenge)
 }
+
+/**
+ * Hook POST request
+ */
 
 type HookMessage struct {
 	Message string `json:"message"`
@@ -73,6 +81,10 @@ func hook(c *gin.Context) {
 	log.Info(h)
 	c.String(200, "EVENT_RECEIVED")
 }
+
+/**
+ * main
+ */
 
 func main() {
 	r := gin.Default()
